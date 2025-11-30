@@ -14,6 +14,6 @@
 
 Модель в разработке, выдающая 54% верных ответов. Первая модель: точность 37%
 
-Прототипы сайта в Figma (https://www.figma.com/design/WlDc6XB6hLWysvN7jrI8WY/%D0%A5%D0%B0%D0%BA%D0%B0%D1%82%D0%BE%D0%BD-Hack-Change?node-id=0-1&t=pS0GUSqwuYP3YmvU-1) + 2 страницы в коде (только frontend) (главная и загрузка массива отзывов)
+Прототипы сайта в Figma (https://www.figma.com/design/WlDc6XB6hLWysvN7jrI8WY/%D0%A5%D0%B0%D0%BA%D0%B0%D1%82%D0%BE%D0%BD-Hack-Change?node-id=0-1&t=pS0GUSqwuYP3YmvU-1) + 2 страницы в коде (главная и загрузка массива отзывов)
 
 Backend писал код на GO, мы должны были перенести его на Python, но не успели
