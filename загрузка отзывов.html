@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Загрузка группы отзывов — макет</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+
+    :root{
+      --bg1: #212121;
+      --bg2: #2a1337;
+      --card:#1d1d1f;
+      --muted:#bdbdbd;
+      --neon:#d7ff6a;
+      --accent:#222;
+      --glass: rgba(255,255,255,0.03);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: radial-gradient(1200px 500px at 90% 10%, rgba(110,45,145,0.35), transparent 10%), linear-gradient(180deg,var(--bg1), #070707 70%);
+      color:#fff;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      display:flex;align-items:center;justify-content:center;
+      padding:40px;
+    }
+
+    .top-left, .top-right{
+      position:fixed;top:18px;display:flex;align-items:center;gap:14px;
+    }
+
+    .top-left{left:18px}
+    .top-right{right:18px}
+    .logo{width:44px;height:44px;background:rgba(255,255,255,0.06);border-radius:6px;display:inline-flex;align-items:center;justify-content:center;font-weight:700}
+    .card{
+      width:min(920px,94vw);
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:22px;
+      padding:36px 42px 44px 42px;
+      box-shadow: 0 6px 30px rgba(0,0,0,0.6);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.03);
+    }
+
+    h1{
+      margin:0 0 26px 0;
+      font-size:44px;
+      line-height:1;
+      font-weight:800;
+      letter-spacing:-0.02em;
+      text-shadow: 0 2px 0 rgba(0,0,0,0.5);
+    }
+
+    .form{
+      display:flex;flex-direction:column;gap:22px;
+    }
+    .file-row{
+      display:flex;align-items:center;gap:18px;padding:18px 22px;border-radius:12px;background:rgba(0,0,0,0.35);border:1px solid rgba(255,255,255,0.03);
+    }
+    .file-input-label{
+      display:flex;align-items:center;gap:14px;color:var(--muted);font-size:18px;cursor:pointer;width:100%;
+    }
+    .paperclip{
+      width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center;border-radius:10px;background:rgba(255,255,255,0.02)
+    }
+    .file-names{color:#cfcfcf;font-size:15px}
+    input[type=file]{display:none}
+    /* big neon button */
+    .actions{display:flex;justify-content:center}
+    button.submit{
+      width:100%;max-width:720px;padding:18px;border-radius:28px;border:none;font-weight:700;font-size:16px;background:linear-gradient(90deg,var(--neon), #b7ff4a);color:#111;cursor:pointer;box-shadow:0 6px 30px rgba(215,255,106,0.12), inset 0 -2px 0 rgba(0,0,0,0.15);
+    }
+    button.submit:active{transform:translateY(1px)}
+    /* helper text */
+    .hint{color:rgba(255,255,255,0.45);font-size:13px}
+    /* responsive */
+    @media (max-width:520px){
+      h1{font-size:28px}
+      .card{padding:20px}
+      .file-row{padding:14px}
+      .paperclip{width:28px;height:28px}
+    }
+  </style>
+</head>
+<body>
+  <div class="top-left">
+    <div class="logo">Твой город</div>
+    <div style="color:rgba(255,255,255,0.8);font-weight:600">Департамент ИТ</div>
+  </div>
+  <div class="top-right">
+    <div style="color:rgba(255,255,255,0.9);font-weight:700">МосТон</div>
+  </div>
+
+  <main class="card" role="main">
+    <h1>Загрузка группы отзыв</h1>
+
+    <form class="form" id="uploadForm" novalidate>
+      <label class="file-row" for="fileInput">
+        <div class="file-input-label">
+          <span class="paperclip" aria-hidden>
+            <!-- simple paperclip SVG -->
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 11.5L12.5 20C10.29 22.2 6.71 22.2 4.5 20C2.3 17.8 2.3 14.21 4.5 12L13 3.5C15.2 1.3 18.79 1.3 21 3.5C23.21 5.71 23.21 9.29 21 11.5L12.5 20" stroke="currentColor" stroke-width="1.5"
+
+stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <div style="flex:1">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+              <div style="font-weight:600">Выбрать CSV-файлы</div>
+              <div class="hint">Поддерживается множественный выбор</div>
+            </div>
+            <div class="file-names" id="fileNames">Файлы не выбраны</div>
+          </div>
+        </div>
+        <input id="fileInput" type="file" accept=".csv,text/csv" multiple>
+      </label>
+
+      <div class="actions">
+        <button type="submit" class="submit">Отправить</button>
+      </div>
+    </form>
+  </main>
+
+  <script>
+    const fileInput = document.getElementById('fileInput');
+    const fileNames = document.getElementById('fileNames');
+    const form = document.getElementById('uploadForm');
+
+    fileInput.addEventListener('change', () => {
+      const files = Array.from(fileInput.files || []);
+      if (files.length === 0) {
+        fileNames.textContent = 'Файлы не выбраны';
+        return;
+      }
+      // validate csv extensions
+      const bad = files.filter(f => !f.name.toLowerCase().endsWith('.csv'));
+      if (bad.length) {
+        fileNames.textContent = 'Найдены недопустимые файлы: ' + bad.map(f=>f.name).join(', ');
+        fileNames.style.color = '#ffb4b4';
+        return;
+      }
+      fileNames.style.color = '';
+      fileNames.textContent = files.map(f => f.name).join(', ');
+    });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const files = Array.from(fileInput.files || []);
+      if (files.length === 0) {
+        alert('Пожалуйста, выберите хотя бы один CSV-файл.');
+        return;
+      }
+
+      const names = files.map(f => f.name).join('\n');
+      alert('Готово к отправке файлов:\n' + names);
+
+      
+      const fd = new FormData();
+      files.forEach((f, i) => fd.append('files[]', f));
+      fetch('/upload', { method: 'POST', body: fd })
+        .then(r => r.json())
+        .then(res => console.log('upload success', res))
+        .catch(err => console.error(err));
+     
+    });
+  </script>
+</body>
+</html>
